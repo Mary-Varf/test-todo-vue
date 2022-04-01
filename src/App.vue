@@ -13,6 +13,7 @@
                 v-bind:tasks="tasks"
                 @delete-task="deleteTask"
                 @edit-task="editTask"
+                @change-index="changeIndex"
               />
             </div>
         </main>
@@ -37,40 +38,88 @@ export default {
         tasks: [
             {
                 id: 0,
-                title: 'sdvsvs',
+                index: 0,
+                title: 'one',
                 status: false,
             },                
             {
                 id: 1,
-                title: 'aaaacsdvsdvsvs',
+                index: 1,
+                title: 'two aaaacsdvsdv vdfgdfg dfvdfvdfbv vsdvsvsv sdfsdfsdf afsedfsfsdf sefsefgwg wefwefwefwe wefrw rfw svs',
                 status: true,
             },                
             {
                 id: 2,
-                title: 'sdfsdf fsf',
+                index: 2,
+                title: 'three sdfsdf fsf',
                 status: false,
-            },                
+            },            
+            {
+                id: 3,
+                index: 3,
+                title: 'four sdfsdf fsf',
+                status: false,
+            },            
+            {
+                id: 4,
+                index: 4,
+                title: 'five sdfsdf fsf',
+                status: false,
+            },            
+            {
+                id: 5,
+                index: 5,
+                title: 'six sdfsdf fsf',
+                status: false,
+            },            
         ]
     }
   },
   methods: {
     deleteTask(id) {
-      this.tasks = this.tasks.filter(task => task.id !== id);
+      if (this.tasks.length) {
+        this.tasks = this.tasks.filter(task => task.id !== id);
+      }
     },
     saveNewTask(task) {
-      this.tasks.push(task);
+      this.tasks.unshift(task);
     },
     editTask(editTask) {
-      this.tasks.map((task) => {
-        if(task.id === editTask.id) {
-          task.title = editTask.title;  
-        }
-      }) 
+      if (this.tasks.length) {
+        this.tasks.map((task) => {
+          if(task.id === editTask.id) {
+            task.title = editTask.title;  
+          }
+        })
+      }
+    },
+    changeIndex(prevIndex, newIndex) {
+      if (prevIndex < newIndex) {
+        this.tasks.map(task => {
+          if(task.index === prevIndex) {
+            task.index = newIndex;
+          } else if (task.index <= newIndex && task.index > prevIndex) {
+            task.index = task.index - 1;
+          }
+        })
+      } else if (prevIndex > newIndex) {
+        this.tasks.map(task => {
+          if(task.index === prevIndex) {
+            task.index = newIndex;
+          } else if (task.index >= newIndex && task.index < prevIndex) {
+            task.index = task.index + 1;
+          }
+        })
+      }
     }
   },
   computed: {
     getId() {
-      return this.tasks[this.tasks.length - 1].id + 1;
+      if (this.tasks.length) {
+        return this.tasks[this.tasks.length - 1].id + 1;
+      } else {
+        return 0;
+      }
     }
   }
 }

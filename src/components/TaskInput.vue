@@ -24,6 +24,7 @@ export default {
             if (this.title.trim()) {
                 const newTask = {
                     id: this.id,
+                    index: this.id,
                     title: this.title,
                     status: false,
                 }
