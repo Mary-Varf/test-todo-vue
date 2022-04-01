@@ -24,9 +24,11 @@ export default {
         border-radius: 20px;
         min-width:40%;
         padding: 20px 25px;
-        background-color: lightblue;
+        background-color: white;
         text-transform: capitalize;
+        box-shadow: 0 0 20px 5px rgba(0, 0, 0, 0.21);
     }
+    
     .items-number:not(:last-child) {
         margin-right: 10px;
     }

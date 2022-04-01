@@ -4,7 +4,7 @@
         <header class="header">
             <div class="container">
                 <h1 class="title header__title">My Task Manager</h1>
-                <TaskInput @save-new-task="saveNewTask" v-bind:id="getId" />
+                <TaskInput @save-new-task="saveNewTask" />
             </div>
         </header>
         <main class="main">
@@ -18,7 +18,14 @@
             </div>
         </main>
     </div>
-    <div class="yellow-bar"></div>
+    <div class="bg">
+    <div class="d-flex flex-column justify-content-center w-100 h-100">
+
+    <div class="d-flex flex-column justify-content-center align-items-center">
+        </div>
+      </div>
+      </div>
+    </div>
   </div>
 </template>
 
@@ -35,43 +42,7 @@ export default {
   },
   data() {
     return {
-        tasks: [
-            {
-                id: 0,
-                index: 0,
-                title: 'one',
-                status: false,
-            },                
-            {
-                id: 1,
-                index: 1,
-                title: 'two aaaacsdvsdv vdfgdfg dfvdfvdfbv vsdvsvsv sdfsdfsdf afsedfsfsdf sefsefgwg wefwefwefwe wefrw rfw svs',
-                status: true,
-            },                
-            {
-                id: 2,
-                index: 2,
-                title: 'three sdfsdf fsf',
-                status: false,
-            },            
-            {
-                id: 3,
-                index: 3,
-                title: 'four sdfsdf fsf',
-                status: false,
-            },            
-            {
-                id: 4,
-                index: 4,
-                title: 'five sdfsdf fsf',
-                status: false,
-            },            
-            {
-                id: 5,
-                index: 5,
-                title: 'six sdfsdf fsf',
-                status: false,
-            },            
+        tasks: [           
         ]
     }
   },
@@ -94,32 +65,14 @@ export default {
       }
     },
     changeIndex(prevIndex, newIndex) {
-      if (prevIndex < newIndex) {
-        this.tasks.map(task => {
-          if(task.index === prevIndex) {
-            task.index = newIndex;
-          } else if (task.index <= newIndex && task.index > prevIndex) {
-            task.index = task.index - 1;
-          }
-        })
-      } else if (prevIndex > newIndex) {
-        this.tasks.map(task => {
-          if(task.index === prevIndex) {
-            task.index = newIndex;
-          } else if (task.index >= newIndex && task.index < prevIndex) {
-            task.index = task.index + 1;
-          }
-        })
-      }
-    }
-  },
-  computed: {
-    getId() {
-      if (this.tasks.length) {
-        return this.tasks[this.tasks.length - 1].id + 1;
-      } else {
-        return 0;
-      }
+      this.tasks.map((task) => {
+        if (task.index === prevIndex && prevIndex < newIndex) {
+          task.index = newIndex + 1;
+        }
+        if (task.index === prevIndex && prevIndex > newIndex) {
+          task.index = newIndex - 1;
+        }
+      })
     }
   }
 }

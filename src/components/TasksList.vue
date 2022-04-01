@@ -3,10 +3,10 @@
         <h2 class="main__title title">Tasks</h2>
         <ul class="list-reset main__list">
             <TaskCard 
-                v-for="task, index of sortedTaskList"
+                v-for="task of sortedTaskList"
                 v-bind:key="task.id"
                 v-bind:task="task"
-                v-bind:currentPosition="index"
+                v-bind:currentPosition="task.index"
                 v-on:delete-task="deleteTask"
                 v-on:edit-task="editTask"
                 v-on:change-index="changeIndex"

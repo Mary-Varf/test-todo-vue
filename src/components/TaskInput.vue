@@ -1,6 +1,6 @@
 <template>
     <form @submit.prevent="onSubmit" class="header__form">
-        <input type="text" class="input header__input" v-model="title" />
+        <input type="text" class="input header__input" v-model="title" placeholder='New task'/>
         <button type="submit" class="header__btn btn btn-reset">Add new task</button>
     </form>
 </template>
@@ -8,12 +8,6 @@
 <script>
 
 export default {
-    props: {
-        id: {
-            type: Number,
-            required: true
-        }
-    },
     data() {
         return {
             title: ''
@@ -23,8 +17,8 @@ export default {
         onSubmit() {
             if (this.title.trim()) {
                 const newTask = {
-                    id: this.id,
-                    index: this.id,
+                    id: Date.now(),
+                    index: Date.now(),
                     title: this.title,
                     status: false,
                 }

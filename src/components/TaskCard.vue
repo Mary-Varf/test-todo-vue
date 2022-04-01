@@ -13,22 +13,20 @@
                 <input type="checkbox" class="checkbox" v-model="task.status"/>
                 <label for="happy"></label>
             </div>
-            <p class="item__title" v-bind:class="{hidden: isEdited}">{{task.title}}</p>
+            <p class="item__title">{{title}}</p>
             <input
                 v-model="title"
                 class="input item__input"
-                v-bind:class="{hidden: !isEdited}"
+                v-on:keyup.enter="handleSave"
             />
-            <button v-if="isEdited" class="btn btn-reset btn-isEdited" v-on:click="handleSave">Save</button>
-            <button v-else class="btn btn-reset btn-isEdited" v-on:click="handleEdit">Edit</button>
+            <button class="btn btn-reset btn-isEdited btn-save" v-on:click="handleSave">Save</button>
+            <button class="btn btn-reset btn-isEdited btn-edit" v-on:click="handleEdit($event)">Edit</button>
             <button class="btn btn-reset btn-delete" v-on:click="$emit('delete-task', task.id)"></button>
         </div>
     </li>
 </template>
 
 <script>
-
-
 export default {
     data() {
         return {
@@ -38,9 +36,11 @@ export default {
         }
     },
     methods: {
-        handleEdit() {
-            document.querySelectorAll('.item__input').forEach(el => el.classList.add('hidden'));
-            document.querySelectorAll('.item__title').forEach(el => el.classList.remove('hidden'));
+        handleEdit(ev) {
+            const targetParent = ev.target.parentNode;
+
+            document.querySelectorAll('.main__item').forEach(el => el.classList.remove('edited'));
+            targetParent.classList.add('edited');
             this.$emit('isEdited-task', this.task.id);
             this.isEdited = true;
         },
@@ -48,6 +48,7 @@ export default {
             if (this.title.trim()) {
                 const newTask = { ...this.task, title: this.title };
                 this.$emit('edit-task', newTask);
+                document.querySelectorAll('.main__item').forEach(el => el.classList.remove('edited'));
                 this.isEdited = false;
             } else {
                 this.isEdited = true;
@@ -83,6 +84,30 @@ export default {
 </script>
 
 <style scoped>
+    .edited {
+        background-color: lightyellow;
+    }
+    .btn-save {
+        display: none;
+    }
+    .item__input {
+        display: none;
+    }
+    .edited > .btn-edit {
+        display: none;
+    }
+    .edited > .btn-save {
+        display: block;
+    }
+    .edited > .item__input {
+        display: block;
+    }
+    .item__title {
+        display: block;
+    }
+    .edited > .item__title {
+        display: none;
+    }
     .checked > .item__title{
         text-decoration: line-through;
     }
