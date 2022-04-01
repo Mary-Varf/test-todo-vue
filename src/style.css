@@ -144,14 +144,19 @@ body {
     justify-content: space-between;
     align-items: center;
 }
-.header__input {
-    width: 200px;
-    padding: 3px 15px;
-    border-radius: 20px;
-    border: 1px solid black;
-    border-top-right-radius: 0;
-    border-bottom-right-radius: 0;
-    box-shadow: var(--main-shadow);
+.input {
+  padding: 3px 15px;
+  border-radius: 20px;
+  border: 1px solid black;
+  box-shadow: var(--main-shadow);
+}
+.item__input {
+  grid-column: 9 span;
+}
+.header__input{
+  width: 200px;
+  border-top-right-radius: 0;
+  border-bottom-right-radius: 0;
 
 }
 .btn {
@@ -183,18 +188,20 @@ body {
 }
 .item__title {
     display: block;
-    grid-column: 2 span;
-}
-.item__descr {
-    display: block;
-    grid-column: 8 span;
+    grid-column: 9 span;
 }
 
 .item__delete {
-    grid-column: 1 span;
+    grid-column: 2 span;
+}
+
+.btn-delete {
+  color: yellow;
+  background-color: black;
 }
 .btn:hover {
-
+  background: blue;
+  color: white;
 }
 
 @media screen and (max-width: 576px) {

@@ -8,6 +8,7 @@
                 v-bind:key="task.id"
                 v-bind:task="task"
                 v-on:delete-task="deleteTask"
+                v-on:edit-task="editTask"
             />
         </ul>
     </section>
@@ -29,6 +30,9 @@ export default {
     methods: {
         deleteTask(id) {
             this.$emit('delete-task', id);
+        },
+        editTask(id) {
+            this.$emit('edit-task', id);
         }
     }
 }

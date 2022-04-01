@@ -4,7 +4,7 @@
         <header class="header">
             <div class="container">
                 <h1 class="title header__title">My Task Manager</h1>
-                <TaskInput @save-new-task="saveNewTask"/>
+                <TaskInput @save-new-task="saveNewTask" v-bind:id="getId" />
             </div>
         </header>
         <main class="main">
@@ -12,6 +12,7 @@
               <TasksList
                 v-bind:tasks="tasks"
                 @delete-task="deleteTask"
+                @edit-task="editTask"
               />
             </div>
         </main>
@@ -37,19 +38,16 @@ export default {
             {
                 id: 0,
                 title: 'sdvsvs',
-                description: 'sdvsdvsv',
                 status: false,
             },                
             {
                 id: 1,
                 title: 'aaaacsdvsdvsvs',
-                description: 'vsdvsdvsdvsdvsv',
                 status: true,
             },                
             {
                 id: 2,
                 title: 'sdfsdf fsf',
-                description: 'vsdvsfsfe sdvsdvsdvsv',
                 status: false,
             },                
         ]
@@ -61,6 +59,18 @@ export default {
     },
     saveNewTask(task) {
       this.tasks.push(task);
+    },
+    editTask(editTask) {
+      this.tasks.map((task) => {
+        if(task.id === editTask.id) {
+          task.title = editTask.title;  
+        }
+      }) 
+    }
+  },
+  computed: {
+    getId() {
+      return this.tasks[this.tasks.length - 1].id + 1;
     }
   }
 }
