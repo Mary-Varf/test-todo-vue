@@ -1,6 +1,6 @@
 <template>
     <section class="done main__section">
-        <h2 class="main__title title">Tasks</h2>
+        <h2  class="visually-hidden">Задачи</h2>
         <ul class="list-reset main__list">
             <TaskCard 
                 v-for="task of sortedTaskList"
@@ -49,7 +49,7 @@ export default {
         },
         changeIndex(prevIndex, newIndex) {
             this.$emit('change-index', prevIndex, newIndex);
-        },
+        }
     },
     computed: {
         doneTasksNumber() {
@@ -59,7 +59,7 @@ export default {
             return this.tasks.filter(task => !task.status).length;
         },
         sortedTaskList() {
-            return this.tasks.sort((a, b) => a.index - b.index);
+            return [...this.tasks].sort((a, b) => a.index - b.index);
         }
     }
 }

@@ -1,7 +1,7 @@
 <template>
     <form @submit.prevent="onSubmit" class="header__form">
-        <input type="text" class="input header__input" v-model="title" placeholder='New task'/>
-        <button type="submit" class="header__btn btn btn-reset">Add new task</button>
+        <input type="text" class="input header__input" v-model="title" placeholder='Новое задание'/>
+        <button type="submit" class="header__btn btn btn-reset">Добавить задание</button>
     </form>
 </template>
 

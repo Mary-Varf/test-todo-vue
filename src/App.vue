@@ -3,7 +3,7 @@
     <div class="content">
         <header class="header">
             <div class="container">
-                <h1 class="title header__title">My Task Manager</h1>
+                <h1 class="title header__title">Мои задачи</h1>
                 <TaskInput @save-new-task="saveNewTask" />
             </div>
         </header>
@@ -42,11 +42,19 @@ export default {
   },
   data() {
     return {
-        tasks: [           
-        ]
+        tasks: this.loadList()
     }
   },
   methods: {
+    setTasksToStore() {
+      localStorage.setItem('tasks', JSON.stringify(this.tasks));
+    },
+    loadList() {
+      const storageTasks = localStorage.getItem('tasks');
+      const taskList = storageTasks ? JSON.parse(storageTasks) : [];
+
+      return taskList;
+    },
     deleteTask(id) {
       if (this.tasks.length) {
         this.tasks = this.tasks.filter(task => task.id !== id);
@@ -54,6 +62,7 @@ export default {
     },
     saveNewTask(task) {
       this.tasks.unshift(task);
+      this.setTasksToStore();
     },
     editTask(editTask) {
       if (this.tasks.length) {
@@ -61,7 +70,8 @@ export default {
           if(task.id === editTask.id) {
             task.title = editTask.title;  
           }
-        })
+        });
+        this.setTasksToStore();
       }
     },
     changeIndex(prevIndex, newIndex) {
@@ -80,7 +90,7 @@ export default {
 
 <style>
 #app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
+  font-family: "Ubuntu", sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }

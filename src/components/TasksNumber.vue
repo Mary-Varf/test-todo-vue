@@ -1,5 +1,5 @@
 <template>
-    <div class="items-number">{{ `${title}: ${itemsNumber}`}}</div>
+    <div class="items-number"><h4>{{ `${title}: ${itemsNumber}`}}</h4></div>
 </template>
 
 <script>
@@ -23,7 +23,7 @@ export default {
     .items-number {
         border-radius: 20px;
         min-width:40%;
-        padding: 20px 25px;
+        padding: 10px 25px;
         background-color: white;
         text-transform: capitalize;
         box-shadow: 0 0 20px 5px rgba(0, 0, 0, 0.21);
