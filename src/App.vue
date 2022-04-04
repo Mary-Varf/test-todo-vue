@@ -19,11 +19,9 @@
         </main>
     </div>
     <div class="bg">
-    <div class="d-flex flex-column justify-content-center w-100 h-100">
-
-    <div class="d-flex flex-column justify-content-center align-items-center">
+      <div class="d-flex flex-column justify-content-center w-100 h-100">
+        <div class="d-flex flex-column justify-content-center align-items-center">
         </div>
-      </div>
       </div>
     </div>
   </div>
@@ -34,7 +32,6 @@ import TasksList from './components/TasksList.vue';
 import TaskInput from './components/TaskInput.vue';
 
 export default {
-
   name: 'App',
   components: {
     TasksList,
