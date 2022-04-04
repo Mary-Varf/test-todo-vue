@@ -26,8 +26,8 @@ import TasksNumber from '@/components/TasksNumber';
 export default {
   data() {
     return {
-      doneTitle: 'done tasks',
-      toDoTitle: 'in progress tasks',
+      doneTitle: 'Выполнено',
+      toDoTitle: 'К исполнению',
     }
   },
   props: {

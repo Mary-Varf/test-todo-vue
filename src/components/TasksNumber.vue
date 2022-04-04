@@ -27,7 +27,6 @@ export default {
     min-width:40%;
     padding: 10px 25px;
     background-color: white;
-    text-transform: capitalize;
     box-shadow: 0 0 20px 5px rgba(0, 0, 0, 0.21);
   }
   
