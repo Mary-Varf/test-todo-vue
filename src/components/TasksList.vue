@@ -67,6 +67,7 @@ export default {
 <style scoped>
     .main__section {
         position: relative;
+        margin-bottom: 50px;
     }
     .main__list {
         margin-bottom: 50px;

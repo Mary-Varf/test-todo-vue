@@ -10,8 +10,8 @@
             @dragenter.prevent
         >
             <div class="item__checkbox">
-                <input type="checkbox" class="checkbox" v-model="task.status"/>
-                <label for="happy"></label>
+                <input type="checkbox" v-bind:id="currentPosition" v-model="task.status"/>
+                <label v-bind:for="currentPosition"></label>
             </div>
             <p class="item__title">{{title}}</p>
             <input
@@ -19,7 +19,7 @@
                 class="input item__input"
                 @keyup.enter="handleSave"
             />
-            <button class="btn btn-reset btn-icon btn-isEdited btn-save" v-on:click="handleSave">
+            <button class="btn btn-reset btn-icon btn-isEdited btn-save" @click="handleSave">
                 <svg version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
                     viewBox="0 0 330 330" style="enable-background:new 0 0 330 330;" xml:space="preserve">
                     <path d="M325.606,84.668L245.334,4.394c-2.813-2.813-6.628-4.393-10.607-4.393H195.02C195.013,0.001,195.007,0,195,0H75
@@ -29,7 +29,7 @@
                     V30.001h30V125c0,8.284,6.716,15,15,15h120c8.284,0,15-6.716,15-15V30.001h18.515L300,101.487V300z"/>
                 </svg>
             </button>
-            <button class="btn btn-reset btn-icon btn-isEdited btn-edit" v-on:click="handleEdit($event)">
+            <button class="btn btn-reset btn-icon btn-isEdited btn-edit" @click="handleEdit($event)">
                 <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
                     viewBox="0 0 330 330" style="enable-background:new 0 0 330 330;" xml:space="preserve">
                     <g id="XMLID_23_">
@@ -42,7 +42,7 @@
                     </g>
                 </svg>
             </button>
-            <button class="btn btn-reset btn-icon btn-delete" v-on:click="$emit('delete-task', task.id)">
+            <button class="btn btn-reset btn-icon btn-delete" @click="$emit('delete-task', task.id)">
                 <svg version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
                     viewBox="0 0 330 330" style="enable-background:new 0 0 330 330;" xml:space="preserve">
                     <g>
@@ -138,6 +138,7 @@ export default {
     }
     .checked > .item__title{
         text-decoration: line-through;
+        color: gray;
     }
     .main__item {
         cursor: pointer;
@@ -151,7 +152,6 @@ export default {
     
     .btn-icon {
         background-color: linear-gradient(to left bottom, #2e07f5 20%, #c408b1 100%);
-        transition: background-color 3s ease-in-out;
         padding: 10px;
     }
     .btn-icon svg {
@@ -171,4 +171,39 @@ export default {
     .edited > .item__input {
         display: block;
     }
+    input[type="checkbox"] {
+    display: none;
+    }
+ 
+    label {
+        position: relative;
+        width: 25px;
+        height: 25px;
+    }
+    label:before {
+        content: " ";
+        display: inline-block;
+        margin-left: 20px;
+        width: 25px;
+        height: 25px;
+        transition: background 0.3s ease;
+        border-radius: 5px;
+        border: 3px solid #2e07f5;
+    }
+    input[type="checkbox"]:checked + label:after {
+        content: " ";
+        position: absolute;
+        top: -12px;
+        left: 22px;
+        width: 25px;
+        height: 25px;
+        transition: background 0.3s ease;
+        background-image: url("../assets/check.svg");
+        background-repeat: no-repeat;
+        background-position: center center;
+        background-size: 25px 25px;
+    }
+
+
+
 </style>
